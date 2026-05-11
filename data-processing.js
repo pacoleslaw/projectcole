@@ -163,8 +163,17 @@
 
   // --- Population Pyramid ---
   function updatePyramidChart(data) {
-    const maleBars = document.querySelectorAll('.pyramid-chart .male-bars rect');
-    const femaleBars = document.querySelectorAll('.pyramid-chart .female-bars rect');
+    const svg = document.querySelector('.pyramid-chart');
+    if (!svg) return;
+
+    const maleBars = svg.querySelectorAll('.male-bars rect');
+    const femaleBars = svg.querySelectorAll('.female-bars rect');
+
+    // If the SVG doesn't contain bar rects yet, render a simple mock pyramid.
+    if (!maleBars.length || !femaleBars.length) {
+      renderPyramidChart(svg, data);
+      return;
+    }
 
     (data.male || []).forEach((width, i) => {
       if (maleBars[i]) maleBars[i].setAttribute('width', Math.min(width, 150));
@@ -173,6 +182,162 @@
       if (femaleBars[i]) femaleBars[i].setAttribute('width', Math.min(width, 150));
     });
   }
+
+  function renderPyramidChart(svg, data) {
+    // Clear previous content
+    svg.innerHTML = '';
+
+    const width = 500;
+    const height = 400;
+    const centerX = 250;
+    const topMargin = 20;
+    const bottomMargin = 20;
+    const usableHeight = height - topMargin - bottomMargin;
+
+    const ageGroups = data.ageGroups || [];
+    const male = data.male || [];
+    const female = data.female || [];
+
+    const buckets = Math.max(male.length, female.length, ageGroups.length);
+    const barGap = 4;
+    const barHeight = Math.floor((usableHeight - (buckets - 1) * barGap) / buckets);
+    const maxVal = Math.max(1, ...male, ...female);
+    const maxBarWidth = 150;
+
+    // X/Y axis labels + background center line
+    // Y label (left side, rotated)
+    const yAxisLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    yAxisLabel.setAttribute('x', 18);
+    yAxisLabel.setAttribute('y', (topMargin + height - bottomMargin) / 2);
+    yAxisLabel.setAttribute('font-size', '12');
+    yAxisLabel.setAttribute('fill', '#6b7280');
+    yAxisLabel.setAttribute('text-anchor', 'middle');
+    yAxisLabel.setAttribute('transform', `rotate(-90 18 ${(topMargin + height - bottomMargin) / 2})`);
+    yAxisLabel.textContent = 'Population (count)';
+    svg.appendChild(yAxisLabel);
+
+      // X label (bottom)
+    const xAxisLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    xAxisLabel.setAttribute('x', centerX);
+    xAxisLabel.setAttribute('y', height - 16);
+    xAxisLabel.setAttribute('font-size', '12');
+    xAxisLabel.setAttribute('fill', '#6b7280');
+    xAxisLabel.setAttribute('text-anchor', 'middle');
+    xAxisLabel.textContent = 'Gender';
+    svg.appendChild(xAxisLabel);
+
+    // Bottom percentage ticks (0%..100%)
+    const ticks = [0, 20, 40, 60, 80, 100];
+    const tickColor = '#6b7280';
+    const tickFontSize = '10';
+    ticks.forEach(pct => {
+      const x = centerX + (pct / 100) * maxBarWidth;
+
+      const tickText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      tickText.setAttribute('x', x);
+      tickText.setAttribute('y', height - 4);
+      tickText.setAttribute('font-size', tickFontSize);
+      tickText.setAttribute('fill', tickColor);
+      tickText.setAttribute('text-anchor', 'start');
+      tickText.textContent = pct + '%';
+      svg.appendChild(tickText);
+
+      // mirror left labels too (so both sides show)
+      const xL = centerX - (pct / 100) * maxBarWidth;
+      const tickTextL = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      tickTextL.setAttribute('x', xL);
+      tickTextL.setAttribute('y', height - 4);
+      tickTextL.setAttribute('font-size', tickFontSize);
+      tickTextL.setAttribute('fill', tickColor);
+      tickTextL.setAttribute('text-anchor', 'end');
+      tickTextL.textContent = pct + '%';
+      svg.appendChild(tickTextL);
+    });
+
+
+    const centerLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    centerLine.setAttribute('x1', centerX);
+    centerLine.setAttribute('y1', topMargin);
+    centerLine.setAttribute('x2', centerX);
+    centerLine.setAttribute('y2', height - bottomMargin);
+    centerLine.setAttribute('stroke', '#e5e7eb');
+    centerLine.setAttribute('stroke-width', '1');
+    svg.appendChild(centerLine);
+
+
+    const maleGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    maleGroup.setAttribute('class', 'male-bars');
+    svg.appendChild(maleGroup);
+
+    const femaleGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    femaleGroup.setAttribute('class', 'female-bars');
+    svg.appendChild(femaleGroup);
+
+    for (let i = 0; i < buckets; i++) {
+      const y = topMargin + i * (barHeight + barGap);
+
+      const mVal = male[i] ?? 0;
+      const fVal = female[i] ?? 0;
+
+      const mW = (mVal / maxVal) * maxBarWidth;
+      const fW = (fVal / maxVal) * maxBarWidth;
+
+      // Male: left side (grow left)
+      const mRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      mRect.setAttribute('x', centerX - mW);
+      mRect.setAttribute('y', y);
+      mRect.setAttribute('width', mW);
+      mRect.setAttribute('height', barHeight);
+      mRect.setAttribute('fill', '#3b82f6');
+      mRect.setAttribute('opacity', '0.85');
+      mRect.setAttribute('rx', '2');
+      maleGroup.appendChild(mRect);
+
+      // Female: right side
+      const fRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      fRect.setAttribute('x', centerX);
+      fRect.setAttribute('y', y);
+      fRect.setAttribute('width', fW);
+      fRect.setAttribute('height', barHeight);
+      fRect.setAttribute('fill', '#10b981');
+      fRect.setAttribute('opacity', '0.85');
+      fRect.setAttribute('rx', '2');
+      femaleGroup.appendChild(fRect);
+
+      // Age label (light) + count numbers on the sides
+      // Left side: Male count
+      const maleCountText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      maleCountText.setAttribute('x', centerX - mW - 6);
+      maleCountText.setAttribute('y', y + barHeight - 2);
+      maleCountText.setAttribute('text-anchor', 'end');
+      maleCountText.setAttribute('font-size', '9');
+      maleCountText.setAttribute('fill', '#3b82f6');
+      maleCountText.textContent = mVal ? String(mVal) : '';
+      svg.appendChild(maleCountText);
+
+      // Center: Age group
+      const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      label.setAttribute('x', centerX);
+      label.setAttribute('y', y + barHeight - 2);
+      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('font-size', '9');
+      label.setAttribute('fill', '#6b7280');
+      label.textContent = ageGroups[i] || '';
+      svg.appendChild(label);
+
+      // Right side: Female count
+      const femaleCountText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      femaleCountText.setAttribute('x', centerX + fW + 6);
+      femaleCountText.setAttribute('y', y + barHeight - 2);
+      femaleCountText.setAttribute('text-anchor', 'start');
+      femaleCountText.setAttribute('font-size', '9');
+      femaleCountText.setAttribute('fill', '#10b981');
+      femaleCountText.textContent = fVal ? String(fVal) : '';
+      svg.appendChild(femaleCountText);
+
+    }
+  }
+
 
   // --- Geotagging Summary Stats ---
   function updateGeotaggingStats() {
@@ -324,7 +489,8 @@
       populateFiltersFromGeoJson,
       applyFilters,
       updateStatsFromMap,
-      updateGeotaggingStats
+      updateGeotaggingStats,
+      updatePyramidChart
     };
 
     // When map layers are ready, populate filters and compute initial stats
@@ -333,7 +499,13 @@
       populateFiltersFromGeoJson(geoJsonData);
       updateStatsFromMap();
       updateGeotaggingStats();
+
+      // Render mock pyramid immediately if available.
+      if (window.MOCK_PYRAMID_DATA) {
+        updatePyramidChart(window.MOCK_PYRAMID_DATA);
+      }
     });
+
 
     // When NCR barangay is clicked, main.js will listen to bgy-selected and call applyFilters
     document.addEventListener('bgy-selected', (e) => {
