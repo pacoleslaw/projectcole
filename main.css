@@ -887,7 +887,7 @@
 }
 
 .main-panels-grid-left {
-  flex: 1 1 60%;
+  flex: 1 1 30%;
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
@@ -895,15 +895,26 @@
 }
 
 .main-panels-grid-mid {
-  flex: 1 1 40%;
+  flex: 1 1 30%;
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
   min-width: 0;
 }
 
+/* Ensure Form 2 & 3 Summary Statistics (form23-widget) matches the width of the Total EAs card column */
+#form23Stats.form23-widget {
+  width: 100%;
+}
+
+/* Also ensure the card container inside the widget does not shrink smaller than its grid column */
+#form23Stats.form23-widget > section,
+#form23Stats.form23-widget {
+  min-width: 0;
+}
+
 .main-panels-grid-right {
-  flex: 1 1 40%;
+  flex: 1 1 50%;
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
