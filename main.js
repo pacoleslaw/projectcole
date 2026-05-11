@@ -253,15 +253,24 @@
 
   // --- Demo data for empty tables ---
   function populateDemoTables() {
-    // Form 2 & 3 Stats
+    // Form 2 & 3 Stats (presentation widget values)
     const form23Stats = document.getElementById('form23Stats');
     if (form23Stats) {
-      form23Stats.innerHTML = `
-        <div class="stat-card"><div class="stat-value">1,248</div><div class="stat-label">Form 2 Submitted</div></div>
-        <div class="stat-card"><div class="stat-value">892</div><div class="stat-label">Form 3 Submitted</div></div>
-        <div class="stat-card"><div class="stat-value">98.7%</div><div class="stat-label">Form 2 Complete</div></div>
-        <div class="stat-card"><div class="stat-value">95.2%</div><div class="stat-label">Form 3 Complete</div></div>
-      `;
+      // Populate demo values into the new card skeleton nodes.
+      const setText = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      };
+
+      // Demo totals/metrics (replace with real wiring if/when available)
+      setText('form23TotalCoveredArea', '1,248');
+      setText('form23RegularHousingUnits', '892');
+      setText('form23SpecialHousingUnits', '356');
+      setText('form23MaxBuildingPerBuilding', '24');
+      setText('form23MaxHouseholdPerHousingUnit', '6');
+      setText('form23TotalHousehold', '2,104');
+      setText('form23HouseholdLeft', '1,080');
+      setText('form23HouseholdRight', '1,024');
     }
 
     // Special Housing Units Table

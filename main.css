@@ -407,9 +407,235 @@
     }
 
     /* Map Data Processing (tab2) layout: keep ring above stats cards */
-    #statsGrid {
+#statsGrid {
       margin-top: 0.5rem;
     }
+
+/* ============================================================
+   FORM 2 & 3 SUMMARY STATISTICS (widget cards)
+   Presentation-only styling: preserves existing JS logic.
+   ============================================================ */
+
+.form23-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.form23-main-card {
+  background: #dfe8e8;
+  border: 1px solid #cfdde0;
+  border-radius: 14px;
+  box-shadow: 0 10px 26px rgba(16, 24, 40, 0.06);
+  padding: 0.9rem 0.9rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.form23-main-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: #0ea5a4;
+}
+
+.form23-main-number {
+  font-size: 2.05rem;
+  font-weight: 800;
+  color: #222;
+  line-height: 1;
+  margin-top: 0.1rem;
+}
+
+.form23-main-caption {
+  color: #5b677a;
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.form23-mid-row {
+  display: flex;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.form23-hu-card {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  padding: 0.6rem 0.65rem;
+  box-shadow: 0 8px 20px rgba(16, 24, 40, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form23-hu-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(16, 24, 40, 0.10);
+}
+
+.form23-hu-label {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 600;
+  line-height: 1.25;
+  flex: 1;
+  min-width: 0;
+}
+
+.form23-hu-value {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #222;
+  text-align: right;
+  padding-left: 0.35rem;
+  white-space: nowrap;
+}
+
+.form23-purple-metrics {
+  display: flex;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.form23-pill-card {
+  flex: 1;
+  background: rgba(199, 125, 255, 0.08);
+  border: 1px solid rgba(199, 125, 255, 0.55);
+  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form23-pill-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(199, 125, 255, 0.14);
+}
+
+.form23-pill-label {
+  color: #6f2db8;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-align: left;
+}
+
+.form23-pill-value {
+  color: #a043ff;
+  font-weight: 900;
+  font-size: 1.05rem;
+  line-height: 1;
+  text-align: left;
+}
+
+.form23-bottom-card {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 0.9rem 0.9rem;
+  box-shadow: 0 10px 26px rgba(16, 24, 40, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.form23-bottom-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.form23-bottom-icon {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0ea5a4;
+}
+
+.form23-bottom-title {
+  font-weight: 800;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.form23-bottom-number {
+  text-align: center;
+  font-size: 1.95rem;
+  font-weight: 900;
+  color: #222;
+  line-height: 1;
+}
+
+.form23-bottom-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.form23-bottom-col {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.55rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.form23-bottom-col-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0ea5a4;
+}
+
+.form23-bottom-col-value {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #222;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .form23-main-number { font-size: 1.85rem; }
+  .form23-bottom-number { font-size: 1.7rem; }
+}
+
+@media (max-width: 680px) {
+  .form23-mid-row,
+  .form23-purple-metrics { flex-direction: column; }
+  .form23-hu-card { width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .form23-main-card,
+  .form23-bottom-card { padding: 0.75rem 0.75rem; }
+  .form23-main-number { font-size: 1.6rem; }
+  .form23-bottom-number { font-size: 1.5rem; }
+}
+
 
 
     .stat-card {
