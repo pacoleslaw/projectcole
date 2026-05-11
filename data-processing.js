@@ -254,7 +254,6 @@
       svg.appendChild(tickTextL);
     });
 
-
     const centerLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     centerLine.setAttribute('x1', centerX);
     centerLine.setAttribute('y1', topMargin);
