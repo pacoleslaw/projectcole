@@ -514,10 +514,13 @@
   background: rgba(199, 125, 255, 0.08);
   border: 1px solid rgba(199, 125, 255, 0.55);
   border-radius: 999px;
-  padding: 0.45rem 0.7rem;
+  padding: 0.3rem 0.4rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  /* flex-direction: column;
+  gap: 0.15rem; */
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -538,7 +541,7 @@
   font-weight: 900;
   font-size: 1.05rem;
   line-height: 1;
-  text-align: left;
+  text-align: right;
 }
 
 .form23-bottom-card {
