@@ -298,7 +298,7 @@
       fRect.setAttribute('y', y);
       fRect.setAttribute('width', fW);
       fRect.setAttribute('height', barHeight);
-      fRect.setAttribute('fill', '#10b981');
+      fRect.setAttribute('fill', '#c713be');
       fRect.setAttribute('opacity', '0.85');
       fRect.setAttribute('rx', '2');
       femaleGroup.appendChild(fRect);
@@ -330,7 +330,7 @@
       femaleCountText.setAttribute('y', y + barHeight - 2);
       femaleCountText.setAttribute('text-anchor', 'start');
       femaleCountText.setAttribute('font-size', '9');
-      femaleCountText.setAttribute('fill', '#10b981');
+      femaleCountText.setAttribute('fill', '#c713be');
       femaleCountText.textContent = fVal ? String(fVal) : '';
       svg.appendChild(femaleCountText);
 
