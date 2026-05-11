@@ -314,15 +314,17 @@
       maleCountText.textContent = mVal ? String(mVal) : '';
       svg.appendChild(maleCountText);
 
-      // Center: Age group
+      // Left side: Age group label
       const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      label.setAttribute('x', centerX);
+      // Place it slightly left of the center axis (so it doesn't overlap male counts)
+      label.setAttribute('x', centerX - 200);
       label.setAttribute('y', y + barHeight - 2);
-      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('text-anchor', 'end');
       label.setAttribute('font-size', '9');
       label.setAttribute('fill', '#6b7280');
       label.textContent = ageGroups[i] || '';
       svg.appendChild(label);
+
 
       // Right side: Female count
       const femaleCountText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
