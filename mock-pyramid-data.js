@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  // 17 age buckets: 0-4, 5-9, ..., 80-84 (5-year groups)
+  // 17 age bracket: 0-4, 5-9, ..., 80-84 (5-year groups)
   // Values represent counts (can be replaced by real survey data later).
   const ageGroups = [
     '80-84', '75-79', '70-74', '65-69', '60-64', '55-59',
@@ -14,7 +14,7 @@
 '20-24', '15-19', '10-14', '5-9', '0-4'
   ];
 
-  // Male and Female counts per age bucket.
+  // Male and Female counts per age bracket.
   const male = [
     118, 140, 160, 175, 168, 155,
     150, 142, 130, 118, 105, 92,
