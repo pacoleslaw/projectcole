@@ -277,10 +277,10 @@
     const specialHuTable = document.getElementById('specialHuTable');
     if (specialHuTable) {
       specialHuTable.innerHTML = `
-        <tr><td>001</td><td>NUR</td><td>12</td></tr>
-        <tr><td>002</td><td>Diplomatic</td><td>3</td></tr>
-        <tr><td>003</td><td>Vacation</td><td>5</td></tr>
-        <tr><td>004</td><td>Vacant</td><td>8</td></tr>
+        <tr><td>NUR</td><td>77777</td><td>12</td></tr>
+        <tr><td>Diplomatic</td><td>88888</td><td>3</td></tr>
+        <tr><td>Vacation</td><td>88889</td><td>5</td></tr>
+        <tr><td>Vacant</td><td>99999</td><td>8</td></tr>
       `;
     }
 
