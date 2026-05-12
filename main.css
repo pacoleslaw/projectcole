@@ -232,14 +232,34 @@
       flex-wrap: wrap;
     }
 
-    .mini {
+/* Base mini sizing (apply everywhere) */
+.mini {
       padding: .45rem .65rem;
       min-height: 40px;
-      width: 100%;
+      width: auto;
       font-size: .88rem;
       border-radius: 9px;
     }
 
+/* Ensure topbar Reset/Download buttons use the intended mini sizing */
+.topbar .mini {
+  padding: .45rem .65rem;
+  min-height: 40px;
+  width: 100%;
+  font-size: .88rem;
+  border-radius: 9px;
+}
+
+
+    .mini {
+      padding: .45rem .65rem;
+      min-height: 40px;
+      width: auto;
+      font-size: .88rem;
+      border-radius: 9px;
+    }
+
+    
     .map-canvas {
       position: relative;
       border-radius: 12px;

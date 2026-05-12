@@ -219,7 +219,7 @@
       // X label (bottom)
     const xAxisLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     xAxisLabel.setAttribute('x', centerX);
-    xAxisLabel.setAttribute('y', height - 16);
+    xAxisLabel.setAttribute('y', height - 17);
     xAxisLabel.setAttribute('font-size', '12');
     xAxisLabel.setAttribute('fill', '#6b7280');
     xAxisLabel.setAttribute('text-anchor', 'middle');
