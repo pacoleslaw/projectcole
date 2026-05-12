@@ -235,7 +235,7 @@
     .mini {
       padding: .45rem .65rem;
       min-height: 40px;
-      width: auto;
+      width: 100%;
       font-size: .88rem;
       border-radius: 9px;
     }

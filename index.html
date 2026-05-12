@@ -56,32 +56,22 @@
             <option value="">All Barangays</option>
           </select>
         </div>
-        <div style="min-width: 260px;">
-          <label for="eaSearch">Enumeration Area (EA)</label>
-          <div class="ea-filter" role="combobox" aria-expanded="false" aria-owns="eaDropdown">
-            <div class="ea-filter-input-row">
-              <input
-                type="search"
-                id="eaSearch"
-                placeholder="Search EA (e.g., EA 001 or 8060...)"
-                autocomplete="off"
-                aria-autocomplete="list"
-                aria-controls="eaDropdown"
-              />
-              <!-- <button class="btn ghost mini ea-clear" id="eaClearBtn" type="button" title="Clear EA selection" aria-label="Clear EA selection">✕</button>
-            </div>
-            <div id="eaDropdown" class="ea-dropdown hidden" role="listbox" aria-label="EA search results"></div>
-            <div class="ea-filter-meta">
-              <span id="eaSelectedLabel" class="muted">All EAs</span> -->
-            </div>
-          </div>
+         <div>
+          <label for="filterBarangay">Enumeration Area</label>
+          <select id="filterBarangay">
+            <option value="">All Enumeration Area</option>
+          </select>
         </div>
 
         <div style="display:flex;align-items:flex-end;">
           <button class="btn mini" id="resetFilters">Reset Filters</button>
         </div>
+          <div style="display:flex;align-items:flex-end;">
+    <button class="btn ghost mini" id="exportBtn" title="Export Report">📥 Download
+    </button>
+          </div>
       </section>
-
+      
               <section class="dashboard-view">
         <div class="tabs-panel">
           <div class="tab-buttons">
@@ -93,7 +83,7 @@
   <!-- Data Processing Dashboard -->
 
   <!-- Filter Controls -->
-  <div style="display: flex; justify-content: flex-end; gap: 1rem; margin: 1rem 0;">
+  <!-- <div style="display: flex; justify-content: flex-end; gap: 1rem; margin: 1rem 0;">
     <button class="btn ghost mini" id="exportBtn" title="Export Report">
       📥 Download
     </button>
@@ -104,8 +94,8 @@
       <option value="">All Enumeration Areas (108)</option>
       <option value="ea001">EA 001</option>
       <!-- Populated by JS -->
-    </select>
-  </div>
+   <!-- </select>
+  </div> ---> 
   
   <!-- Top Summary Cards -->
   <div class="status-summary-grid" id="statusSummaryGrid">
