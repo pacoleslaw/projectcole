@@ -1,7 +1,4 @@
-/**
- * Chart-Gauges.js - Custom SVG Charts for EA Dashboard
- * Implements: Half-gauge (Special HU), Donut charts (Regular HU status), Pyramid (gender/age)
- */
+
 
 class ChartGauges {
   constructor() {
