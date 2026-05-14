@@ -352,107 +352,49 @@
 
                 <div class="main-panels-grid-left">
 
-                  <div class="panel">
+                  <div class="panel form23-panel">
 
-                    <h3> Form 2 & 3 Summary
-                      Statistics</h3>
+                    <h3>Form 2 & 3 Summary Statistics</h3>
+                    <p class="muted italic-subtitle">By total number</p>
 
-                    <div class="form23-widget" id="form23Stats" aria-label="Form 2 & 3 Summary Statistics">
-
-                      <!-- Widget skeleton (values injected by JS / dynamic updates) -->
-
-                      <section class="form23-main-card">
-
-                        <div class="form23-main-icon" aria-hidden="true" data-lucide="map"></div>
-
-                        <div class="form23-main-number" id="form23TotalCoveredArea">0</div>
-
-                        <div class="form23-main-caption">Total number of covered area</div>
-
-                      </section>
-
-
-
-                      <section class="form23-mid-row">
-
-                        <div class="form23-hu-card">
-
-                          <div class="form23-hu-label">Total number of regular housing unit</div>
-
-                          <div class="form23-hu-value" id="form23RegularHousingUnits">0</div>
-
+                    <div class="form23-widget-modern" id="form23Stats" aria-label="Form 2 & 3 Summary Statistics">
+                      <div class="form23-stats-list">
+                        <div class="form23-stat-row">
+                          <span class="form23-stat-label">Covered Area</span>
+                          <span class="form23-stat-value" id="form23TotalCoveredArea">0</span>
                         </div>
-
-                        <div class="form23-hu-card">
-
-                          <div class="form23-hu-label">Total number of special housing unit</div>
-
-                          <div class="form23-hu-value" id="form23SpecialHousingUnits">0</div>
-
+                        <div class="form23-stat-row">
+                          <span class="form23-stat-label">Regular Housing Unit</span>
+                          <span class="form23-stat-value" id="form23RegularHousingUnits">0</span>
                         </div>
-
-                      </section>
-
-
-
-                      <section class="form23-purple-metrics">
-
-                        <div class="form23-pill-card">
-
-                          <div class="form23-pill-label">Maximum Housing unit per building</div>
-
-                          <div class="form23-pill-value" id="form23MaxBuildingPerBuilding">0</div>
-
+                        <div class="form23-stat-row">
+                          <span class="form23-stat-label">Special Housing Unit</span>
+                          <span class="form23-stat-value" id="form23SpecialHousingUnits">0</span>
                         </div>
-
-                        <div class="form23-pill-card">
-
-                          <div class="form23-pill-label">Maximum household number per housing unit</div>
-
-                          <div class="form23-pill-value" id="form23MaxHouseholdPerHousingUnit">0</div>
-
+                        <div class="form23-stat-row">
+                          <span class="form23-stat-label">Household member</span>
+                          <span class="form23-stat-value" id="form23TotalHousehold">0</span>
                         </div>
-
-                      </section>
-
-
-
-                      <section class="form23-bottom-card">
-
-                        <div class="form23-bottom-top">
-
-                          <div class="form23-bottom-title">Total number of household</div>
-
+                        <div class="form23-stat-row">
+                          <span class="form23-stat-label">Male households</span>
+                          <span class="form23-stat-value" id="form23HouseholdLeft">0</span>
                         </div>
-
-
-
-                        <div class="form23-bottom-number" id="form23TotalHousehold">0</div>
-
-
-
-                        <div class="form23-bottom-columns">
-
-                          <div class="form23-bottom-col">
-
-                            <div class="form23-bottom-col-icon" aria-hidden="true" data-lucide="user"></div>
-
-                            <div class="form23-bottom-col-value" id="form23HouseholdLeft">0</div>
-
-                          </div>
-
-                          <div class="form23-bottom-col">
-
-                            <div class="form23-bottom-col-icon" aria-hidden="true" data-lucide="user"></div>
-
-                            <div class="form23-bottom-col-value" id="form23HouseholdRight">0</div>
-
-                          </div>
-
+                        <div class="form23-stat-row">
+                          <span class="form23-stat-label">Female household</span>
+                          <span class="form23-stat-value" id="form23HouseholdRight">0</span>
                         </div>
+                      </div>
 
-                      </section>
-
+                      <div class="form23-max-metrics-box">
+                        <div class="form23-max-metric">
+                          <div class="max-value" id="form23MaxBuildingPerBuilding">0</div>
+                          <div class="max-label">Max HU/ Building</div>
+                        </div>
+                        <div class="form23-max-metric">
+                          <div class="max-value" id="form23MaxHouseholdPerHousingUnit">0</div>
+                          <div class="max-label">Max HhN/ HU</div>
+                        </div>
+                      </div>
                     </div>
 
                   </div>

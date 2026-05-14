@@ -454,204 +454,81 @@
     }
 
 /* ============================================================
-   FORM 2 & 3 SUMMARY STATISTICS (widget cards)
-   Presentation-only styling: preserves existing JS logic.
+   FORM 2 & 3 SUMMARY STATISTICS (Modern List Design)
    ============================================================ */
 
-.form23-widget {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  width: 100%;
-  margin-top: 0.2rem;
+.italic-subtitle {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: -0.25rem;
+  margin-bottom: 1.25rem;
 }
 
-/* Main Top Card: Total covered area */
-.form23-main-card {
-  background: #e2ede9; /* beautiful soft muted teal-grey */
-  border-radius: 8px;
-  padding: 0.65rem 0.85rem;
+.form23-widget-modern {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.form23-stats-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #f3f4f6;
+}
+
+.form23-stat-row {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.form23-stat-label {
+  font-size: 0.95rem;
+  color: #374151;
+  font-weight: 400;
+}
+
+.form23-stat-value {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #000;
+}
+
+.form23-max-metrics-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem 0;
+}
+
+.form23-max-metric {
   text-align: center;
-  min-width: 0;
-}
-
-.form23-main-icon {
-  color: #0ea5a4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.form23-main-icon svg {
-  width: 24px;
-  height: 24px;
-  stroke-width: 2.2;
-}
-
-.form23-main-number {
-  font-size: 1.65rem;
-  font-weight: 800;
-  color: #0f172a;
-  line-height: 1.05;
-  margin: 0.1rem 0 0.05rem 0;
-}
-
-.form23-main-caption {
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: #475569;
-}
-
-/* Mid Rows: Regular and Special Housing Units */
-.form23-mid-row {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  width: 100%;
-  min-width: 0;
+  gap: 0.5rem;
 }
 
-.form23-hu-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 0.35rem 0.65rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-width: 0;
+.form23-max-metric:first-child {
+  border-right: 1px solid #f3f4f6;
 }
 
-.form23-hu-label {
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: #475569;
-}
-
-.form23-hu-value {
-  font-size: 0.8rem;
+.max-value {
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #0f172a;
-}
-
-/* Purple Metrics: Max housing units / household */
-.form23-purple-metrics {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  width: 100%;
-  min-width: 0;
-}
-
-.form23-pill-card {
-  background: #faf5ff;
-  border: 1px solid #e9d5ff;
-  border-radius: 20px;
-  padding: 0.3rem 0.65rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-width: 0;
-}
-
-.form23-pill-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #7e22ce;
-}
-
-.form23-pill-value {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #7e22ce;
-}
-
-/* Bottom Card: Total Household section */
-.form23-bottom-card {
-  background: #f1f5f9;
-  border-radius: 8px;
-  padding: 0.65rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  min-width: 0;
-}
-
-.form23-bottom-top {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-}
-
-.form23-bottom-icon {
-  color: #0ea5a4;
-  display: flex;
-  align-items: center;
-}
-
-.form23-bottom-icon svg {
-  width: 16px;
-  height: 16px;
-  stroke-width: 2.2;
-}
-
-.form23-bottom-title {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.form23-bottom-number {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #0f172a;
+  color: #000;
   line-height: 1;
-  margin: 0.05rem 0;
 }
 
-.form23-bottom-columns {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.4rem;
-  width: 100%;
-}
-
-.form23-bottom-col {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 0.35rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.1rem;
-  min-width: 0;
-}
-
-.form23-bottom-col-icon {
-  color: #0ea5a4;
-  display: flex;
-  align-items: center;
-}
-
-.form23-bottom-col-icon svg {
-  width: 14px;
-  height: 14px;
-  stroke-width: 2;
-}
-
-.form23-bottom-col-value {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #0f172a;
+.max-label {
+  font-size: 0.9rem;
+  color: #1f2937;
+  font-weight: 500;
 }
 
 
@@ -890,17 +767,6 @@
   flex: 1;
 }
 
-.main-panels-grid {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  align-items: stretch;
-}
-
-.main-panels-grid > * {
-  flex: 1;
-}
-
 .main-panels-grid-left {
   flex: 1 1 30%;
   display: flex;
@@ -917,8 +783,8 @@
   min-width: 0;
 }
 
-/* Ensure Form 2 & 3 Summary Statistics (form23-widget) matches the width of the Total EAs card column */
-#form23Stats.form23-widget {
+/* Ensure Form 2 & 3 Summary Statistics (form23-widget-modern) matches the width of the Total EAs card column */
+#form23Stats.form23-widget-modern {
   width: 100%;
 }
 
@@ -1135,11 +1001,15 @@
   }
 }
 
-.form23-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.8rem;
-  margin-top: 0.5rem;
+.form23-panel {
+  padding: 1.5rem !important;
+  border-radius: 10px !important;
+}
+
+.form23-panel h3 {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
 }
 
 .form23-stat-card {
