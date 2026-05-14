@@ -273,25 +273,66 @@
       setText('form23HouseholdRight', '1,024');
     }
 
-    // Special Housing Units Table
+    // Special Housing Units List Rows
     const specialHuTable = document.getElementById('specialHuTable');
     if (specialHuTable) {
       specialHuTable.innerHTML = `
-        <tr><td>NUR</td><td>77777</td><td>12</td></tr>
-        <tr><td>Diplomatic</td><td>88888</td><td>3</td></tr>
-        <tr><td>Vacation</td><td>88889</td><td>5</td></tr>
-        <tr><td>Vacant</td><td>99999</td><td>8</td></tr>
+        <div class="legend-row-item">
+          <div class="legend-row-left">
+            <i data-lucide="building" style="color: #9e9e9e; width: 14px; height: 14px;"></i>
+            <span>HSN 77777</span>
+          </div>
+          <div class="legend-row-right">156</div>
+        </div>
+        <div class="legend-row-item">
+          <div class="legend-row-left">
+            <i data-lucide="building" style="color: #fcc12d; width: 14px; height: 14px;"></i>
+            <span>HSN 88888</span>
+          </div>
+          <div class="legend-row-right">156</div>
+        </div>
+        <div class="legend-row-item">
+          <div class="legend-row-left">
+            <i data-lucide="building" style="color: #7344ff; width: 14px; height: 14px;"></i>
+            <span>HSN 88889</span>
+          </div>
+          <div class="legend-row-right">156</div>
+        </div>
+        <div class="legend-row-item">
+          <div class="legend-row-left">
+            <i data-lucide="building" style="color: #1bc5bd; width: 14px; height: 14px;"></i>
+            <span>HSN 99999</span>
+          </div>
+          <div class="legend-row-right">157</div>
+        </div>
       `;
     }
 
-    // Regular Housing Units Table
+    // Regular Housing Units List Rows
     const regularHuTable = document.getElementById('regularHuTable');
     if (regularHuTable) {
       regularHuTable.innerHTML = `
-        <tr><td>Complete</td><td>1,156</td></tr>
-        <tr><td>Refused</td><td>45</td></tr>
-        <tr><td>Terminated</td><td>23</td></tr>
-        <tr><td>Other</td><td>24</td></tr>
+        <div class="legend-row-item">
+          <div class="legend-row-left">
+            <i data-lucide="home" style="color: #1bc5bd; width: 14px; height: 14px;"></i>
+            <span>Complete interviewed</span>
+          </div>
+          <div class="legend-row-right">208</div>
+        </div>
+        <div class="legend-row-item">
+          <div class="legend-row-left">
+            <i data-lucide="home" style="color: #7344ff; width: 14px; height: 14px;"></i>
+            <span>Refuse household</span>
+          </div>
+          <div class="legend-row-right">208</div>
+        </div>
+        <div class="legend-row-item">
+          <div class="legend-row-left">
+            <i data-lucide="home" style="color: #ff5252; width: 14px; height: 14px;"></i>
+            <span>Terminated</span>
+          </div>
+          <div class="legend-row-right">209</div>
+        </div>
       `;
     }
   }

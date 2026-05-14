@@ -2037,3 +2037,70 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* ============================================================
+   MODERN HOUSING UNIT BREAKDOWN PANELS (PER SCREENSHOT)
+   ============================================================ */
+.breakdown-card-modern {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.breakdown-card-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: center;
+  line-height: 1.25;
+  margin-bottom: 0.25rem;
+}
+
+.gauge-svg-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.25rem 0;
+}
+
+.gauge-svg-wrapper > div {
+  width: 100%;
+  max-width: 250px;
+}
+
+.legend-rows-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.legend-row-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 0.3rem 0.5rem;
+  background: #ffffff;
+}
+
+.legend-row-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #475569;
+}
+
+.legend-row-right {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0f172a;
+}
