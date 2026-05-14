@@ -28,6 +28,7 @@
     const provinces = new Set();
     const cityMuns = new Set();
     const barangays = new Set();
+    const eas = new Set();
 
     geoJsonData.features.forEach(f => {
       const p = f.properties || {};
@@ -38,6 +39,8 @@
       // Use BGY_GEO for barangay filtering when barangay name is not present
       if (p.barangay) barangays.add(p.barangay);
       else if (p.BGY_GEO) barangays.add(p.BGY_GEO);
+
+      if (p.id) eas.add(p.id);
     });
 
     const fillSelect = (sel, items) => {
@@ -57,6 +60,7 @@
     fillSelect(document.getElementById('filterProvince'), provinces);
     fillSelect(document.getElementById('filterCityMun'), cityMuns);
     fillSelect(document.getElementById('filterBarangay'), barangays);
+    fillSelect(document.getElementById('filterEA'), eas);
   }
 
   // --- Special Housing Unit Breakdown ---
@@ -453,8 +457,9 @@
     const province = document.getElementById('filterProvince')?.value || '';
     const cityMun = document.getElementById('filterCityMun')?.value || '';
     const barangay = document.getElementById('filterBarangay')?.value || '';
+    const ea = document.getElementById('filterEA')?.value || '';
 
-    const selectedEA = window.__SELECTED_EA__ || null;
+    const selectedEA = window.__SELECTED_EA__ || ea || null;
 
     const activeStatuses = getActiveStatuses();
 

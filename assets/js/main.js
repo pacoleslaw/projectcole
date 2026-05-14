@@ -97,8 +97,7 @@
 
   // --- Geographic filter handlers ---
   function initFilters() {
-    ['filterRegion', 'filterProvince', 'filterCityMun', 'filterBarangay'].forEach(id => {
-
+    ['filterRegion', 'filterProvince', 'filterCityMun', 'filterBarangay', 'filterEA'].forEach(id => {
       const el = document.getElementById(id);
       if (el) {
         el.addEventListener('change', () => {
@@ -113,7 +112,7 @@
     const resetBtn = document.getElementById('resetFilters');
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
-        ['filterRegion', 'filterProvince', 'filterCityMun', 'filterBarangay'].forEach(id => {
+        ['filterRegion', 'filterProvince', 'filterCityMun', 'filterBarangay', 'filterEA'].forEach(id => {
           const el = document.getElementById(id);
           if (el) el.value = '';
         });
@@ -237,6 +236,62 @@
   }
 
 
+  // --- Hierarchy Level Selector interactivity ---
+  function initHierarchySelector() {
+    const selector = document.getElementById('levelSelector');
+    if (!selector) return;
+
+    // Mock data for different levels to demonstrate "updating values"
+    const levelMockData = {
+      'Region': { total: '82,450', covered: '12,480', reg: '8,920', spec: '3,560', hh: '21,040' },
+      'Province': { total: '12,140', covered: '1,248', reg: '892', spec: '356', hh: '2,104' },
+      'CityMun': { total: '4,230', covered: '450', reg: '320', spec: '130', hh: '840' },
+      'Barangay': { total: '820', covered: '82', reg: '54', spec: '28', hh: '156' },
+      'EA': { total: '120', covered: '12', reg: '8', spec: '4', hh: '24' }
+    };
+
+    selector.querySelectorAll('.level-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const level = pill.dataset.level;
+        
+        // Visual update of pills
+        selector.querySelectorAll('.level-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        // Update dashboard values (Data Processing tab only)
+        const data = levelMockData[level] || levelMockData['Province'];
+        
+        // Update Status Cards (Top)
+        const totalCardValue = document.querySelector('.status-card.total .status-value');
+        if (totalCardValue) totalCardValue.textContent = data.total;
+
+        // Update Form 2 & 3 Stats
+        const setText = (id, val) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = val;
+        };
+        setText('form23TotalCoveredArea', data.covered);
+        setText('form23RegularHousingUnits', data.reg);
+        setText('form23SpecialHousingUnits', data.spec);
+        setText('form23TotalHousehold', data.hh);
+        
+        showToast(`Dashboard updated for ${level} view`);
+      });
+    });
+
+    const filterBtn = document.getElementById('hierarchyFilterBtn');
+    if (filterBtn) {
+      filterBtn.addEventListener('click', () => {
+        const topbar = document.querySelector('.topbar');
+        if (topbar) {
+          const isHidden = window.getComputedStyle(topbar).display === 'none';
+          topbar.style.display = isHidden ? 'grid' : 'none';
+        }
+      });
+    }
+  }
+
+
   // --- NCR Barangay click handler ---
   function initNcrBarangayFilter() {
     document.addEventListener('bgy-selected', (e) => {
@@ -356,6 +411,7 @@
     initFilters();
     initLayerToggles();
     initLayersFab();
+    initHierarchySelector();
     initNcrBarangayFilter();
 
     populateDemoTables();

@@ -116,15 +116,10 @@
         </div>
 
         <div>
-
-          <label for="filterBarangay">Enumeration Area</label>
-
-          <select id="filterBarangay">
-
+          <label for="filterEA">Enumeration Area</label>
+          <select id="filterEA">
             <option value="">All Enumeration Area</option>
-
           </select>
-
         </div>
 
 
@@ -200,6 +195,20 @@
   </div> --->
 
 
+
+              <!-- Hierarchy Level Selector -->
+              <div class="hierarchy-selector">
+                <div class="level-pills" id="levelSelector">
+                  <div class="level-pill" data-level="Region">Region</div>
+                  <div class="level-pill active" data-level="Province">Province</div>
+                  <div class="level-pill" data-level="CityMun">City/municipal</div>
+                  <div class="level-pill" data-level="Barangay">Barangay</div>
+                  <div class="level-pill" data-level="EA">EA</div>
+                </div>
+                <button class="icon-btn-ghost" id="hierarchyFilterBtn" title="Filters">
+                  <i data-lucide="filter" style="width:18px;height:18px;"></i>
+                </button>
+              </div>
 
               <!-- Top Summary Cards -->
 
