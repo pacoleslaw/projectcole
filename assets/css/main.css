@@ -1746,6 +1746,15 @@
   font-weight: 600;
 }
 
+.regular-hu-table th:nth-child(2) {
+  text-align: right;
+}
+
+.regular-hu-table td:nth-child(2) {
+  text-align: right;
+  font-weight: 600;
+}
+
 .category-dot {
   display: inline-block;
   width: 10px;

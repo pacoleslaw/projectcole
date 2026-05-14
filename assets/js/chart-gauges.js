@@ -171,91 +171,75 @@ initHalfGauge(containerId) {
   }
 }
 
- initDonutGauge(containerId) {
+initDonutGauge(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
   container.innerHTML = `
-    <svg class="donut-chart" viewBox="0 0 200 200">
+    <svg class="half-gauge-chart" viewBox="0 0 220 150">
 
       <!-- Background -->
-      <circle
-        cx="100"
-        cy="100"
-        r="70"
+      <path
+        d="M 30 110 A 80 80 0 0 1 190 110"
         fill="none"
         stroke="#e5e7eb"
         stroke-width="18"
+        stroke-linecap="round"
+        pathLength="100"
       />
 
       <!-- Complete -->
-      <circle
+      <path
         id="reg-complete"
-        class="donut-segment"
-        cx="100"
-        cy="100"
-        r="70"
+        d="M 30 110 A 80 80 0 0 1 190 110"
         fill="none"
         stroke="#10b981"
         stroke-width="18"
         stroke-linecap="round"
         pathLength="100"
-        transform="rotate(-90 100 100)"
       />
 
       <!-- Refused -->
-      <circle
+      <path
         id="reg-refused"
-        class="donut-segment"
-        cx="100"
-        cy="100"
-        r="70"
+        d="M 30 110 A 80 80 0 0 1 190 110"
         fill="none"
         stroke="#3b82f6"
         stroke-width="18"
         stroke-linecap="butt"
         pathLength="100"
-        transform="rotate(-90 100 100)"
       />
 
       <!-- Terminated -->
-      <circle
+      <path
         id="reg-terminated"
-        class="donut-segment"
-        cx="100"
-        cy="100"
-        r="70"
+        d="M 30 110 A 80 80 0 0 1 190 110"
         fill="none"
         stroke="#f59e0b"
         stroke-width="18"
         stroke-linecap="butt"
         pathLength="100"
-        transform="rotate(-90 100 100)"
       />
 
       <!-- Other -->
-      <circle
+      <path
         id="reg-other"
-        class="donut-segment"
-        cx="100"
-        cy="100"
-        r="70"
+        d="M 30 110 A 80 80 0 0 1 190 110"
         fill="none"
         stroke="#6b7280"
         stroke-width="18"
         stroke-linecap="butt"
         pathLength="100"
-        transform="rotate(-90 100 100)"
       />
 
-      <!-- Center Text -->
+      <!-- Total -->
       <text
-        class="donut-total"
-        x="100"
-        y="95"
+        class="gauge-total"
+        x="110"
+        y="88"
         text-anchor="middle"
         dominant-baseline="middle"
-        font-size="28"
+        font-size="30"
         font-weight="800"
         fill="#111827"
       >
@@ -263,9 +247,9 @@ initHalfGauge(containerId) {
       </text>
 
       <text
-        class="donut-label"
-        x="100"
-        y="118"
+        class="gauge-label"
+        x="110"
+        y="108"
         text-anchor="middle"
         dominant-baseline="middle"
         font-size="13"
@@ -280,7 +264,7 @@ initHalfGauge(containerId) {
   this.updateDonutGauge();
 }
 
- updateDonutGauge() {
+updateDonutGauge() {
   const data = window.dashboardData?.regularHU || {
     complete: 1156,
     refused: 45,
@@ -338,7 +322,7 @@ initHalfGauge(containerId) {
   });
 
   const totalEl = document.querySelector(
-    '#regularGauge .donut-total'
+    '#regularGauge .gauge-total'
   );
 
   if (totalEl) {
