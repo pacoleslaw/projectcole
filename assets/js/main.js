@@ -282,11 +282,8 @@
     const filterBtn = document.getElementById('hierarchyFilterBtn');
     if (filterBtn) {
       filterBtn.addEventListener('click', () => {
-        const topbar = document.querySelector('.topbar');
-        if (topbar) {
-          const isHidden = window.getComputedStyle(topbar).display === 'none';
-          topbar.style.display = isHidden ? 'grid' : 'none';
-        }
+        // Funnel icon click - can be used for advanced filter modal in future
+        showToast('Advanced filters coming soon');
       });
     }
   }
