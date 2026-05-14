@@ -192,11 +192,14 @@
     // Clear previous content
     svg.innerHTML = '';
 
+    // Expanded custom canvas height to completely fill the vertical card envelope
     const width = 500;
-    const height = 400;
-    const centerX = 250;
+    const height = 480;
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+    const centerX = 260;
     const topMargin = 20;
-    const bottomMargin = 20;
+    const bottomMargin = 35;
     const usableHeight = height - topMargin - bottomMargin;
 
     const ageGroups = data.ageGroups || [];
@@ -204,70 +207,93 @@
     const female = data.female || [];
 
     const buckets = Math.max(male.length, female.length, ageGroups.length);
-    const barGap = 4;
+    const barGap = 12;
     const barHeight = Math.floor((usableHeight - (buckets - 1) * barGap) / buckets);
-    const maxVal = Math.max(1, ...male, ...female);
+    const maxVal = 50; // Represents 5% out of 1000 total
     const maxBarWidth = 150;
 
-    // X/Y axis labels + background center line
-    // Y label (left side, rotated)
-    const yAxisLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    yAxisLabel.setAttribute('x', 18);
-    yAxisLabel.setAttribute('y', (topMargin + height - bottomMargin) / 2);
-    yAxisLabel.setAttribute('font-size', '12');
-    yAxisLabel.setAttribute('fill', '#6b7280');
-    yAxisLabel.setAttribute('text-anchor', 'middle');
-    yAxisLabel.setAttribute('transform', `rotate(-90 18 ${(topMargin + height - bottomMargin) / 2})`);
-    yAxisLabel.textContent = 'Population (count)';
-    svg.appendChild(yAxisLabel);
+    // Inline SVG Legend at top right
+    const legendGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    legendGroup.setAttribute('class', 'pyramid-legend');
+    
+    // Male Legend Marker
+    const mLegendBox = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    mLegendBox.setAttribute('x', 400);
+    mLegendBox.setAttribute('y', 20);
+    mLegendBox.setAttribute('width', 20);
+    mLegendBox.setAttribute('height', 12);
+    mLegendBox.setAttribute('rx', '2');
+    mLegendBox.setAttribute('fill', '#7344ff'); // solid purple-blue
+    legendGroup.appendChild(mLegendBox);
 
-      // X label (bottom)
-    const xAxisLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    xAxisLabel.setAttribute('x', centerX);
-    xAxisLabel.setAttribute('y', height - 17);
-    xAxisLabel.setAttribute('font-size', '12');
-    xAxisLabel.setAttribute('fill', '#6b7280');
-    xAxisLabel.setAttribute('text-anchor', 'middle');
-    xAxisLabel.textContent = 'Gender';
-    svg.appendChild(xAxisLabel);
+    const mLegendText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    mLegendText.setAttribute('x', 425);
+    mLegendText.setAttribute('y', 31);
+    mLegendText.setAttribute('font-size', '12');
+    mLegendText.setAttribute('fill', '#64748b');
+    mLegendText.textContent = 'Male';
+    legendGroup.appendChild(mLegendText);
 
-    // Bottom percentage ticks (0%..100%)
-    const ticks = [0, 20, 40, 60, 80, 100];
-    const tickColor = '#6b7280';
+    // Female Legend Marker
+    const fLegendBox = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    fLegendBox.setAttribute('x', 400);
+    fLegendBox.setAttribute('y', 42);
+    fLegendBox.setAttribute('width', 20);
+    fLegendBox.setAttribute('height', 12);
+    fLegendBox.setAttribute('rx', '2');
+    fLegendBox.setAttribute('fill', '#f472b6'); // solid soft pink
+    legendGroup.appendChild(fLegendBox);
+
+    const fLegendText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    fLegendText.setAttribute('x', 425);
+    fLegendText.setAttribute('y', 53);
+    fLegendText.setAttribute('font-size', '12');
+    fLegendText.setAttribute('fill', '#64748b');
+    fLegendText.textContent = 'Female';
+    legendGroup.appendChild(fLegendText);
+
+    svg.appendChild(legendGroup);
+
+    // Bottom percentage ticks (0%..5%)
+    const ticks = [0, 1, 2, 3, 4, 5];
+    const tickColor = '#64748b';
     const tickFontSize = '10';
+
     ticks.forEach(pct => {
-      const x = centerX + (pct / 100) * maxBarWidth;
-
-      const tickText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      tickText.setAttribute('x', x);
-      tickText.setAttribute('y', height - 4);
-      tickText.setAttribute('font-size', tickFontSize);
-      tickText.setAttribute('fill', tickColor);
-      tickText.setAttribute('text-anchor', 'start');
-      tickText.textContent = pct + '%';
-      svg.appendChild(tickText);
-
-      // mirror left labels too (so both sides show)
-      const xL = centerX - (pct / 100) * maxBarWidth;
+      // Left side tick
+      const xL = centerX - (pct / 5) * maxBarWidth;
       const tickTextL = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       tickTextL.setAttribute('x', xL);
-      tickTextL.setAttribute('y', height - 4);
+      tickTextL.setAttribute('y', height - 5);
       tickTextL.setAttribute('font-size', tickFontSize);
       tickTextL.setAttribute('fill', tickColor);
-      tickTextL.setAttribute('text-anchor', 'end');
+      tickTextL.setAttribute('text-anchor', 'middle');
       tickTextL.textContent = pct + '%';
       svg.appendChild(tickTextL);
+
+      // Right side tick (only rendered up to 4% per screenshot reference)
+      if (pct > 0 && pct <= 4) {
+        const xR = centerX + (pct / 5) * maxBarWidth;
+        const tickTextR = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        tickTextR.setAttribute('x', xR);
+        tickTextR.setAttribute('y', height - 5);
+        tickTextR.setAttribute('font-size', tickFontSize);
+        tickTextR.setAttribute('fill', tickColor);
+        tickTextR.setAttribute('text-anchor', 'middle');
+        tickTextR.textContent = pct + '%';
+        svg.appendChild(tickTextR);
+      }
     });
 
+    // Center vertical separator line
     const centerLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     centerLine.setAttribute('x1', centerX);
     centerLine.setAttribute('y1', topMargin);
     centerLine.setAttribute('x2', centerX);
-    centerLine.setAttribute('y2', height - bottomMargin);
-    centerLine.setAttribute('stroke', '#e5e7eb');
+    centerLine.setAttribute('y2', height - bottomMargin + 5);
+    centerLine.setAttribute('stroke', '#e2e8f0');
     centerLine.setAttribute('stroke-width', '1');
     svg.appendChild(centerLine);
-
 
     const maleGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     maleGroup.setAttribute('class', 'male-bars');
@@ -286,61 +312,35 @@
       const mW = (mVal / maxVal) * maxBarWidth;
       const fW = (fVal / maxVal) * maxBarWidth;
 
-      // Male: left side (grow left)
+      // Male solid bar
       const mRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
       mRect.setAttribute('x', centerX - mW);
       mRect.setAttribute('y', y);
       mRect.setAttribute('width', mW);
       mRect.setAttribute('height', barHeight);
-      mRect.setAttribute('fill', '#3b82f6');
-      mRect.setAttribute('opacity', '0.85');
+      mRect.setAttribute('fill', '#7344ff'); // uniform flat purple-blue
       mRect.setAttribute('rx', '2');
       maleGroup.appendChild(mRect);
 
-      // Female: right side
+      // Female solid bar
       const fRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
       fRect.setAttribute('x', centerX);
       fRect.setAttribute('y', y);
       fRect.setAttribute('width', fW);
       fRect.setAttribute('height', barHeight);
-      fRect.setAttribute('fill', '#c713be');
-      fRect.setAttribute('opacity', '0.85');
+      fRect.setAttribute('fill', '#f472b6'); // uniform flat soft pink
       fRect.setAttribute('rx', '2');
       femaleGroup.appendChild(fRect);
 
-      // Age label (light) + count numbers on the sides
-      // Left side: Male count
-      const maleCountText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      maleCountText.setAttribute('x', centerX - mW - 6);
-      maleCountText.setAttribute('y', y + barHeight - 2);
-      maleCountText.setAttribute('text-anchor', 'end');
-      maleCountText.setAttribute('font-size', '9');
-      maleCountText.setAttribute('fill', '#3b82f6');
-      maleCountText.textContent = mVal ? String(mVal) : '';
-      svg.appendChild(maleCountText);
-
-      // Left side: Age group label
+      // Left side: Dedicated column for Age group category label
       const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      // Place it slightly left of the center axis (so it doesn't overlap male counts)
-      label.setAttribute('x', centerX - 200);
-      label.setAttribute('y', y + barHeight - 2);
+      label.setAttribute('x', 95);
+      label.setAttribute('y', y + barHeight - 4);
       label.setAttribute('text-anchor', 'end');
-      label.setAttribute('font-size', '9');
-      label.setAttribute('fill', '#6b7280');
+      label.setAttribute('font-size', '12');
+      label.setAttribute('fill', '#475569');
       label.textContent = ageGroups[i] || '';
       svg.appendChild(label);
-
-
-      // Right side: Female count
-      const femaleCountText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      femaleCountText.setAttribute('x', centerX + fW + 6);
-      femaleCountText.setAttribute('y', y + barHeight - 2);
-      femaleCountText.setAttribute('text-anchor', 'start');
-      femaleCountText.setAttribute('font-size', '9');
-      femaleCountText.setAttribute('fill', '#c713be');
-      femaleCountText.textContent = fVal ? String(fVal) : '';
-      svg.appendChild(femaleCountText);
-
     }
   }
 
