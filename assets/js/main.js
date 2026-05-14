@@ -279,6 +279,7 @@
       specialHuTable.innerHTML = `
         <div class="legend-row-item">
           <div class="legend-row-left">
+            <span class="category-dot" style="background: #9e9e9e;"></span>
             <i data-lucide="building" style="color: #9e9e9e; width: 14px; height: 14px;"></i>
             <span>HSN 77777</span>
           </div>
@@ -286,6 +287,7 @@
         </div>
         <div class="legend-row-item">
           <div class="legend-row-left">
+            <span class="category-dot" style="background: #fcc12d;"></span>
             <i data-lucide="building" style="color: #fcc12d; width: 14px; height: 14px;"></i>
             <span>HSN 88888</span>
           </div>
@@ -293,6 +295,7 @@
         </div>
         <div class="legend-row-item">
           <div class="legend-row-left">
+            <span class="category-dot" style="background: #7344ff;"></span>
             <i data-lucide="building" style="color: #7344ff; width: 14px; height: 14px;"></i>
             <span>HSN 88889</span>
           </div>
@@ -300,6 +303,7 @@
         </div>
         <div class="legend-row-item">
           <div class="legend-row-left">
+            <span class="category-dot" style="background: #1bc5bd;"></span>
             <i data-lucide="building" style="color: #1bc5bd; width: 14px; height: 14px;"></i>
             <span>HSN 99999</span>
           </div>
@@ -314,6 +318,7 @@
       regularHuTable.innerHTML = `
         <div class="legend-row-item">
           <div class="legend-row-left">
+            <span class="category-dot" style="background: #1bc5bd;"></span>
             <i data-lucide="home" style="color: #1bc5bd; width: 14px; height: 14px;"></i>
             <span>Complete interviewed</span>
           </div>
@@ -321,6 +326,7 @@
         </div>
         <div class="legend-row-item">
           <div class="legend-row-left">
+            <span class="category-dot" style="background: #7344ff;"></span>
             <i data-lucide="home" style="color: #7344ff; width: 14px; height: 14px;"></i>
             <span>Refuse household</span>
           </div>
@@ -328,6 +334,7 @@
         </div>
         <div class="legend-row-item">
           <div class="legend-row-left">
+            <span class="category-dot" style="background: #ff5252;"></span>
             <i data-lucide="home" style="color: #ff5252; width: 14px; height: 14px;"></i>
             <span>Terminated</span>
           </div>
