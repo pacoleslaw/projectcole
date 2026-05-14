@@ -820,8 +820,8 @@
 
 .main-panels-grid {
   display: flex;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  gap: 1rem;
+  margin-top: 1rem;
   align-items: stretch;
 }
 
@@ -837,12 +837,20 @@
   min-width: 0;
 }
 
+.main-panels-grid-left .panel {
+  flex: 1;
+}
+
 .main-panels-grid-mid {
   flex: 1 1 30%;
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
   min-width: 0;
+}
+
+.main-panels-grid-mid .breakdown-card-modern {
+  flex: 1;
 }
 
 /* Ensure Form 2 & 3 Summary Statistics (form23-widget-modern) matches the width of the Total EAs card column */
@@ -862,6 +870,10 @@
   flex-direction: column;
   gap: 0.65rem;
   min-width: 0;
+}
+
+.main-panels-grid-right .panel {
+  flex: 1;
 }
 
 @media (max-width: 1024px) {
@@ -1064,7 +1076,7 @@
 }
 
 .form23-panel {
-  padding: 1.5rem !important;
+  padding: 1.25rem !important;
   border-radius: 10px !important;
 }
 
@@ -1949,7 +1961,7 @@
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 10px;
-  padding: 1rem 0.85rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
