@@ -1815,3 +1815,225 @@
 .gauge-label {
   font-family: inherit;
 }
+
+/* ============================================================
+   MODERN DASHBOARD TOP SUMMARY CARDS (PER SCREENSHOT)
+   ============================================================ */
+
+.status-dashboard-wrapper {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: stretch;
+}
+
+.status-cards-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.status-card-modern {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.75rem 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  min-height: 84px;
+}
+
+.status-card-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* Specific Card Colors */
+.status-card-modern[data-variant="cyan"] {
+  background: #f0fbfb;
+  border-color: #b2e5e5;
+}
+.status-card-modern[data-variant="cyan"] .status-icon-badge { background: #e6f7f7; color: #0ea5a4; }
+.status-card-modern[data-variant="cyan"] .status-value { color: #0ea5a4; }
+
+.status-card-modern[data-variant="red"] .status-icon-badge { background: #ffebee; color: #ff4d6d; }
+.status-card-modern[data-variant="red"] .status-value { color: #ff4d6d; }
+.status-card-modern[data-variant="red"] .status-percent { color: #ff4d6d; }
+
+.status-card-modern[data-variant="grey"] .status-icon-badge { background: #f1f5f9; color: #64748b; }
+.status-card-modern[data-variant="grey"] .status-value { color: #1e293b; }
+.status-card-modern[data-variant="grey"] .status-percent { color: #64748b; }
+
+.status-card-modern[data-variant="orange"] .status-icon-badge { background: #fff7ed; color: #f97316; }
+.status-card-modern[data-variant="orange"] .status-value { color: #f97316; }
+.status-card-modern[data-variant="orange"] .status-percent { color: #f97316; }
+
+.status-card-modern[data-variant="purple"] .status-icon-badge { background: #f5f3ff; color: #8b5cf6; }
+.status-card-modern[data-variant="purple"] .status-value { color: #8b5cf6; }
+.status-card-modern[data-variant="purple"] .status-percent { color: #8b5cf6; }
+
+.status-card-modern[data-variant="blue"] .status-icon-badge { background: #eff6ff; color: #3b82f6; }
+.status-card-modern[data-variant="blue"] .status-value { color: #3b82f6; }
+.status-card-modern[data-variant="blue"] .status-percent { color: #3b82f6; }
+
+.status-card-modern[data-variant="green"] .status-icon-badge { background: #ecfdf5; color: #10b981; }
+.status-card-modern[data-variant="green"] .status-value { color: #10b981; }
+.status-card-modern[data-variant="green"] .status-percent { color: #10b981; }
+
+/* Left side elements inside the modern card */
+.status-card-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.status-icon-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.status-icon-badge i {
+  width: 16px;
+  height: 16px;
+}
+
+.status-card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* Right side elements inside the modern card */
+.status-card-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.status-card-right.has-pct {
+  justify-content: space-between;
+  padding-top: 0.1rem;
+}
+
+.status-card-modern .status-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1;
+  margin: 0;
+}
+
+.status-card-modern .status-percent {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* Overall Processing Card on the right */
+.status-overall-card {
+  width: 200px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.overall-donut-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overall-donut-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.overall-donut-bg {
+  fill: none;
+  stroke: #f1f5f9;
+  stroke-width: 12;
+}
+
+.overall-donut-fill {
+  fill: none;
+  stroke: #facc15;
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-dasharray: 314;
+  stroke-dashoffset: 266.9;
+  transition: stroke-dashoffset 1s ease-out;
+}
+
+.overall-donut-text {
+  position: absolute;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.overall-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .status-dashboard-wrapper {
+    flex-direction: column;
+  }
+  .status-overall-card {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.75rem 1rem;
+  }
+  .overall-donut-wrapper {
+    width: 80px;
+    height: 80px;
+  }
+  .overall-donut-text {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .status-cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .status-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

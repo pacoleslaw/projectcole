@@ -203,150 +203,139 @@
 
               <!-- Top Summary Cards -->
 
-              <div class="status-summary-grid" id="statusSummaryGrid">
+              <div class="status-dashboard-wrapper" id="statusSummaryGrid">
+                <div class="status-cards-grid">
+                  <!-- Card 1: Total number -->
+                  <div class="status-card-modern status-card total" data-variant="cyan">
+                    <div class="status-card-left">
+                      <div class="status-icon-badge"><i data-lucide="home"></i></div>
+                      <div class="status-card-label">Total number</div>
+                    </div>
+                    <div class="status-card-right">
+                      <div class="status-value">82</div>
+                    </div>
+                  </div>
 
-                <!-- Total EA Card -->
+                  <!-- Card 2: Not yet cleared RSSO -->
+                  <div class="status-card-modern status-card pending" data-variant="red">
+                    <div class="status-card-left">
+                      <div class="status-icon-badge"><i data-lucide="file-clock"></i></div>
+                      <div class="status-card-label">Not yet cleared<br />RSSO</div>
+                    </div>
+                    <div class="status-card-right has-pct">
+                      <div class="status-value">9</div>
+                      <div class="status-percent">0.97%</div>
+                    </div>
+                  </div>
 
-                <div class="status-card total">
+                  <!-- Card 3: Processed RSSO -->
+                  <div class="status-card-modern status-card progress" data-variant="grey">
+                    <div class="status-card-left">
+                      <div class="status-icon-badge"><i data-lucide="file-check"></i></div>
+                      <div class="status-card-label">Processed<br />RSSO</div>
+                    </div>
+                    <div class="status-card-right has-pct">
+                      <div class="status-value">9</div>
+                      <div class="status-percent">0.97%</div>
+                    </div>
+                  </div>
 
-                  <div class="status-icon"><i data-lucide="bar-chart-3"></i></div>
+                  <!-- Card 4: Preliminary Checking -->
+                  <div class="status-card-modern status-card progress" data-variant="grey">
+                    <div class="status-card-left">
+                      <div class="status-icon-badge"><i data-lucide="file-search"></i></div>
+                      <div class="status-card-label">Preliminary<br />Checking</div>
+                    </div>
+                    <div class="status-card-right has-pct">
+                      <div class="status-value">9</div>
+                      <div class="status-percent">0.97%</div>
+                    </div>
+                  </div>
 
-                  <div class="status-value">108</div>
+                  <!-- Card 5: Cleared Preliminary Checking -->
+                  <div class="status-card-modern status-card progress" data-variant="grey">
+                    <div class="status-card-left">
+                      <div class="status-icon-badge"><i data-lucide="file-check"></i></div>
+                      <div class="status-card-label">Cleared<br />Preliminary Checking</div>
+                    </div>
+                    <div class="status-card-right has-pct">
+                      <div class="status-value">9</div>
+                      <div class="status-percent">0.97%</div>
+                    </div>
+                  </div>
 
-                  <div class="status-percent">100%</div>
+                  <!-- Card 6: Validation -->
+                  <div class="status-card-modern status-card progress" data-variant="grey">
+                    <div class="status-card-left">
+                      <div class="status-icon-badge"><i data-lucide="file-text"></i></div>
+                      <div class="status-card-label">Validation</div>
+                    </div>
+                    <div class="status-card-right has-pct">
+                      <div class="status-value">9</div>
+                      <div class="status-percent">0.97%</div>
+                    </div>
+                  </div>
 
-                  <div class="status-label">Total EAs</div>
+                  <!-- Card 7: Returned PSO -->
+                  <div class="status-card-modern status-card progress" data-variant="orange">
+                    <div class="status-card-left">
+                      <div class="status-icon-badge"><i data-lucide="folder-minus"></i></div>
+                      <div class="status-card-label">Returned<br />PSO</div>
+                    </div>
+                    <div class="status-card-right has-pct">
+                      <div class="status-value">9</div>
+                      <div class="status-percent">0.97%</div>
+                    </div>
+                  </div>
 
+                  <!-- Card 8: Resubmitted PSO -->
+                  <div class="status-card-modern status-card progress" data-variant="purple">
+                    <div class="status-card-left">
+                      <div class="status-icon-badge"><i data-lucide="folder-plus"></i></div>
+                      <div class="status-card-label">Resubmitted<br />PSO</div>
+                    </div>
+                    <div class="status-card-right has-pct">
+                      <div class="status-value">9</div>
+                      <div class="status-percent">0.97%</div>
+                    </div>
+                  </div>
+
+                  <!-- Card 9: Validated -->
+                  <div class="status-card-modern status-card progress" data-variant="blue">
+                    <div class="status-card-left">
+                      <div class="status-icon-badge"><i data-lucide="file-check"></i></div>
+                      <div class="status-card-label">Validated</div>
+                    </div>
+                    <div class="status-card-right has-pct">
+                      <div class="status-value">9</div>
+                      <div class="status-percent">0.97%</div>
+                    </div>
+                  </div>
+
+                  <!-- Card 10: Certified -->
+                  <div class="status-card-modern status-card success" data-variant="green">
+                    <div class="status-card-left">
+                      <div class="status-icon-badge"><i data-lucide="check-circle-2"></i></div>
+                      <div class="status-card-label">Certified</div>
+                    </div>
+                    <div class="status-card-right has-pct">
+                      <div class="status-value">11</div>
+                      <div class="status-percent">1.26%</div>
+                    </div>
+                  </div>
                 </div>
 
-
-
-                <!-- Processing Stages -->
-
-                <div class="status-card pending">
-
-                  <div class="status-icon"><i data-lucide="clock"></i></div>
-
-                  <div class="status-value">18</div>
-
-                  <div class="status-percent">17%</div>
-
-                  <div class="status-label">Not Yet Cleared<br />Data Collection</div>
-
+                <!-- Overall processing card -->
+                <div class="status-overall-card">
+                  <div class="overall-donut-wrapper">
+                    <svg class="overall-donut-svg" viewBox="0 0 120 120">
+                      <circle class="overall-donut-bg" cx="60" cy="60" r="50"></circle>
+                      <circle class="overall-donut-fill" cx="60" cy="60" r="50"></circle>
+                    </svg>
+                    <div class="overall-donut-text">15%</div>
+                  </div>
+                  <div class="overall-label">Over all processing</div>
                 </div>
-
-
-
-                <div class="status-card progress">
-
-                  <div class="status-icon"><i data-lucide="check-circle-2"></i></div>
-
-                  <div class="status-value">12</div>
-
-                  <div class="status-percent">11%</div>
-
-                  <div class="status-label">Cleared<br />Data Collection</div>
-
-                </div>
-
-
-
-                <div class="status-card progress">
-
-                  <div class="status-icon"><i data-lucide="search"></i></div>
-
-                  <div class="status-value">15</div>
-
-                  <div class="status-percent">14%</div>
-
-                  <div class="status-label">Preliminary<br />Checking</div>
-
-                </div>
-
-
-
-                <div class="status-card progress">
-
-                  <div class="status-icon"><i data-lucide="check-circle-2"></i></div>
-
-                  <div class="status-value">10</div>
-
-                  <div class="status-percent">9%</div>
-
-                  <div class="status-label">Cleared Preliminary<br />Checking</div>
-
-                </div>
-
-
-
-                <div class="status-card progress">
-
-                  <div class="status-icon"><i data-lucide="settings"></i></div>
-
-                  <div class="status-value">14</div>
-
-                  <div class="status-percent">13%</div>
-
-                  <div class="status-label">Data Processing</div>
-
-                </div>
-
-
-
-                <div class="status-card progress">
-
-                  <div class="status-icon"><i data-lucide="check-circle-2"></i></div>
-
-                  <div class="status-value">11</div>
-
-                  <div class="status-percent">10%</div>
-
-                  <div class="status-label">Data Processed</div>
-
-                </div>
-
-
-
-                <div class="status-card progress">
-
-                  <div class="status-icon"><i data-lucide="search"></i></div>
-
-                  <div class="status-value">9</div>
-
-                  <div class="status-percent">8%</div>
-
-                  <div class="status-label">Validation</div>
-
-                </div>
-
-
-
-                <div class="status-card progress">
-
-                  <div class="status-icon"><i data-lucide="check-circle-2"></i></div>
-
-                  <div class="status-value">10</div>
-
-                  <div class="status-percent">9%</div>
-
-                  <div class="status-label">Validated</div>
-
-                </div>
-
-
-
-                <div class="status-card success">
-
-                  <div class="status-icon"><i data-lucide="party-popper"></i></div>
-
-                  <div class="status-value">9</div>
-
-                  <div class="status-percent">8%</div>
-
-                  <div class="status-label">Certified</div>
-
-                </div>
-
               </div>
 
 
