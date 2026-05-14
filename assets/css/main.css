@@ -235,9 +235,11 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: .75rem;
-      display: grid;
-      grid-template-rows: auto minmax(360px, 1fr) auto;
+      display: flex;
+      flex-direction: column;
       gap: .6rem;
+      height: 100%;
+      flex: 1;
     }
 
     .map-header {
@@ -287,6 +289,7 @@
       border-radius: 12px;
       border: 1px solid var(--line);
       overflow: hidden;
+      flex: 1;
       min-height: 480px;
     }
 
@@ -1433,22 +1436,25 @@
   display: flex;
   flex-direction: row;
   gap: 0.65rem;
+  align-items: stretch;
 }
 
 .overview-left {
-  flex: 1 1 60%;
+  flex: 1 1 65%;
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
   min-width: 0;
+  align-self: stretch;
 }
 
 .overview-right {
-  flex: 1 1 40%;
+  flex: 1 1 35%;
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
   min-width: 0;
+  align-self: stretch;
 }
 
 @media (max-width: 1024px) {
