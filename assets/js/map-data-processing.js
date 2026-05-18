@@ -137,10 +137,24 @@ async function loadGeoJson() {
             dashArray: '4,6'
           });
 
+          const syntheticGeotagging = {
+            regular: { tagged: Math.floor(Math.random() * 800) + 200, total: 1000 },
+            new: { tagged: Math.floor(Math.random() * 200) + 50, total: 300 },
+            ooc: { tagged: Math.floor(Math.random() * 50) + 10, total: 80 },
+            tra: { tagged: Math.floor(Math.random() * 20) + 5, total: 30 }
+          };
+
           const popupContent = `
             <div style="font-size:1rem;font-weight:700;margin-bottom:.3rem;">${name}</div>
             <div style="font-size:.85rem;color:#666;">Geocode: ${props.geocode || 'N/A'}</div>
-            <div style="font-size:.8rem;color:#888;margin-top:.3rem;">Click to filter by this barangay</div>
+            <div style="font-size:.85rem;color:#444;margin-top:.5rem;">
+              <strong>Geotagging Summary:</strong><br/>
+              Regular: ${syntheticGeotagging.regular.tagged} / ${syntheticGeotagging.regular.total}<br/>
+              New: ${syntheticGeotagging.new.tagged} / ${syntheticGeotagging.new.total}<br/>
+              OOC: ${syntheticGeotagging.ooc.tagged} / ${syntheticGeotagging.ooc.total}<br/>
+              TRA: ${syntheticGeotagging.tra.tagged} / ${syntheticGeotagging.tra.total}
+            </div>
+            <div style="font-size:.8rem;color:#888;margin-top:.5rem;border-top:1px solid #ccc;padding-top:.3rem;">Click to filter by this barangay</div>
           `;
 
           poly.bindPopup(popupContent);
@@ -152,6 +166,9 @@ async function loadGeoJson() {
             this.setStyle({ weight: 1.5, fillOpacity: 0.06 });
           });
           poly.on('click', function() {
+            if (window.DataProcessing?.updateGeotaggingStats) {
+              window.DataProcessing.updateGeotaggingStats(syntheticGeotagging);
+            }
             const sel = document.getElementById('filterBarangay');
             if (sel) {
               const exists = Array.from(sel.options).some(o => o.value === name);
@@ -247,6 +264,11 @@ async function loadGeoJson() {
           const cfg = STATUS_CONFIG[status];
           const completionRate = Math.max(0, Math.round(100 - (index % 90)));
           
+          const geoRegular = { tagged: Math.round(completionRate / 100 * 200), total: 200 };
+          const geoNew = { tagged: Math.round(completionRate / 100 * 50), total: 50 };
+          const geoOoc = { tagged: Math.round(completionRate / 100 * 10), total: 10 };
+          const geoTra = { tagged: Math.round(completionRate / 100 * 5), total: 5 };
+
           return {
             id: props.Geocode || `EA_${index + 1}`,
             status: status,
@@ -254,7 +276,8 @@ async function loadGeoJson() {
             lastUpdate: new Date(Date.now() - (index * 86400000)).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
             totalHU: Math.round(Math.random() * 150 + 50),
             form2Submitted: Math.round(completionRate / 100 * (Math.random() * 100 + 800)),
-            form3Submitted: Math.round(completionRate / 100 * (Math.random() * 80 + 600))
+            form3Submitted: Math.round(completionRate / 100 * (Math.random() * 80 + 600)),
+            geotagging: { regular: geoRegular, new: geoNew, ooc: geoOoc, tra: geoTra }
           };
         }
 
@@ -273,23 +296,29 @@ async function loadGeoJson() {
           className: isBottleneck ? 'bottleneck-poly' : ''
         });
 
-        // Tooltip using actual EA properties
+        // Popup using actual EA properties and synthetic geotagging data
         const props = feature.properties || {};
-        const tooltipContent = `
+        const popupContent = `
           <h4>${props.name || 'EA Boundary'}</h4>
           <div>
             <span class="badge" style="background:${cfg.fillColor};color:${cfg.color};">${cfg.label}</span>
           </div>
-          <div>Completion Rate</div>
+          <div style="margin-top:0.5rem;">Completion Rate</div>
           <div class="progress-mini"><div class="progress-mini-bar" style="width:${synthetic.completionRate}%;background:${cfg.color};"></div></div>
           <div style="text-align:right;font-size:.75rem;color:var(--muted);">${synthetic.completionRate}%</div>
-          <div class="meta">Last Updated: ${synthetic.lastUpdate}</div>
+          <div class="meta" style="margin-top:0.5rem;">Last Updated: ${synthetic.lastUpdate}</div>
           <div class="meta">Geocode: ${props.Geocode || 'N/A'}   BGY: ${props.BGY_GEO || 'N/A'}</div>
+          <div style="font-size:.85rem;color:#444;margin-top:.5rem;border-top:1px solid #ccc;padding-top:.3rem;">
+              <strong>Geotagging Summary:</strong><br/>
+              Regular: ${synthetic.geotagging.regular.tagged} / ${synthetic.geotagging.regular.total}<br/>
+              New: ${synthetic.geotagging.new.tagged} / ${synthetic.geotagging.new.total}<br/>
+              OOC: ${synthetic.geotagging.ooc.tagged} / ${synthetic.geotagging.ooc.total}<br/>
+              TRA: ${synthetic.geotagging.tra.tagged} / ${synthetic.geotagging.tra.total}
+          </div>
         `;
 
-        poly.bindTooltip(tooltipContent, {
-          permanent: false, direction: 'top', offset: [0, -10],
-          className: 'leaflet-tooltip-custom', opacity: 1
+        poly.bindPopup(popupContent, {
+          className: 'leaflet-popup-custom'
         });
 
         poly.on('mouseover', function() {
@@ -297,6 +326,11 @@ async function loadGeoJson() {
         });
         poly.on('mouseout', function() {
           this.setStyle({ weight: cfg.border, fillOpacity: isBottleneck ? 0.55 : 0.35 });
+        });
+        poly.on('click', function() {
+          if (window.DataProcessing?.updateGeotaggingStats) {
+            window.DataProcessing.updateGeotaggingStats(synthetic.geotagging);
+          }
         });
 
         // Store refs for filtering

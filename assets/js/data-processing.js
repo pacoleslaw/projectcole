@@ -350,9 +350,9 @@
 
 
   // --- Geotagging Summary Stats ---
-  function updateGeotaggingStats() {
+  function updateGeotaggingStats(customData) {
     // Demo data model   replace with your real data source
-    const geotaggingData = {
+    const geotaggingData = customData || {
       regular: { tagged: 1248, total: 1600 },
       new: { tagged: 342, total: 760 },
       ooc: { tagged: 86, total: 139 },
@@ -492,6 +492,9 @@
     });
 
     updateStatsFromMap();
+    if (!barangay && !selectedEA) {
+      updateGeotaggingStats(); // Reset to aggregate/default
+    }
   }
 
   function initDataProcessing() {
