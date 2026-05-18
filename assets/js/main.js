@@ -243,11 +243,11 @@
 
     // Mock data for different levels to demonstrate "updating values"
     const levelMockData = {
-      'Region': { total: '82,450', covered: '12,480', reg: '8,920', spec: '3,560', hh: '21,040' },
-      'Province': { total: '12,140', covered: '1,248', reg: '892', spec: '356', hh: '2,104' },
-      'CityMun': { total: '4,230', covered: '450', reg: '320', spec: '130', hh: '840' },
-      'Barangay': { total: '820', covered: '82', reg: '54', spec: '28', hh: '156' },
-      'EA': { total: '120', covered: '12', reg: '8', spec: '4', hh: '24' }
+      'Region': [82450, 8000, 12000, 15000, 10000, 10000, 5000, 4000, 10000, 8450],
+      'Province': [12140, 1200, 1800, 2200, 1500, 1500, 700, 600, 1500, 1140],
+      'CityMun': [4230, 400, 600, 800, 500, 500, 250, 200, 500, 480],
+      'Barangay': [820, 80, 120, 150, 100, 100, 50, 40, 100, 80],
+      'EA': [120, 12, 18, 22, 15, 15, 7, 6, 15, 10]
     };
 
     selector.querySelectorAll('.level-pill').forEach(pill => {
@@ -262,18 +262,38 @@
         const data = levelMockData[level] || levelMockData['Province'];
         
         // Update Status Cards (Top)
-        const totalCardValue = document.querySelector('.status-card.total .status-value');
-        if (totalCardValue) totalCardValue.textContent = data.total;
+        const cards = document.querySelectorAll('.status-card');
+        const total = data[0];
+        
+        cards.forEach((card, index) => {
+          const valueEl = card.querySelector('.status-value');
+          const percentEl = card.querySelector('.status-percent');
+          
+          if (valueEl && data[index] !== undefined) {
+            valueEl.textContent = data[index].toLocaleString();
+          }
+          
+          if (percentEl && data[index] !== undefined && total > 0 && index > 0) {
+            const pct = (data[index] / total) * 100;
+            percentEl.textContent = pct.toFixed(2) + '%';
+          }
+        });
 
-        // Update Form 2 & 3 Stats
-        const setText = (id, val) => {
-          const el = document.getElementById(id);
-          if (el) el.textContent = val;
-        };
-        setText('form23TotalCoveredArea', data.covered);
-        setText('form23RegularHousingUnits', data.reg);
-        setText('form23SpecialHousingUnits', data.spec);
-        setText('form23TotalHousehold', data.hh);
+        // Update the overall processing donut
+        const certified = data[9] || 0;
+        const validated = data[8] || 0;
+        const overallPct = total > 0 ? Math.round(((certified + validated) / total) * 100) : 0;
+        
+        const overallDonutFill = document.querySelector('.overall-donut-fill');
+        const overallDonutText = document.querySelector('.overall-donut-text');
+        if (overallDonutFill && overallDonutText) {
+            const radius = 50;
+            const circumference = 2 * Math.PI * radius;
+            const offset = circumference - (overallPct / 100) * circumference;
+            overallDonutFill.style.strokeDasharray = `${circumference} ${circumference}`;
+            overallDonutFill.style.strokeDashoffset = offset;
+            overallDonutText.textContent = overallPct + '%';
+        }
         
         showToast(`Dashboard updated for ${level} view`);
       });
